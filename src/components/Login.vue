@@ -38,8 +38,8 @@ export default {
   data() {
     return {
       loginForm: {
-        username: "",
-        password: ""
+        username: "admin",
+        password: "123456"
       },
       loginRules: {
         // 验证用户名是否合法
@@ -77,11 +77,17 @@ export default {
         //使用对象解构 并起别名，此时获得的data数据干净
         const { data: res } = await this.$http.post("login", this.loginForm);
         //通过res.meta.status状态码判断请求
-        if (res.meta.status === 200) {
-          return this.$message.success("登陆成功");
-        } else {
+        console.log(res);
+
+        if (res.meta.status !== 200) {
           return this.$message.error("登陆失败！");
         }
+        this.$message({
+          message: "登录成功！",
+          type: "success"
+        });
+        window.sessionStorage.setItem("token", res.data.token);
+        this.$router.push("/home");
       });
     }
   }

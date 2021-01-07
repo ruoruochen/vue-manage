@@ -24,7 +24,7 @@
         </el-form-item>
         <!-- 按钮区 -->
         <el-form-item class="btns">
-          <el-button type="primary" @click="loginbtn">登录</el-button>
+          <el-button type="primary">登录</el-button>
           <el-button type="info" @click="reset">重置</el-button>
         </el-form-item>
       </el-form>
@@ -50,9 +50,9 @@ export default {
             trigger: "blur"
           },
           {
-            min: 3,
+            min: 6,
             max: 16,
-            message: "用户名长度需为3~16位之间",
+            message: "用户名长度需为6~16位之间",
             trigger: "blur"
           }
         ],
@@ -68,21 +68,6 @@ export default {
     reset() {
       // console.log(this);
       this.$refs.loginFormRef.resetFields();
-    },
-    loginbtn() {
-      this.$refs.loginFormRef.validate(async valid => {
-        if (!valid) return;
-        //post方法返回一个Promise对象 使用async 函数
-        //async表示该函数中有异步操作 await表示后面表达式需要等待结果
-        //使用对象解构 并起别名，此时获得的data数据干净
-        const { data: res } = await this.$http.post("login", this.loginForm);
-        //通过res.meta.status状态码判断请求
-        if (res.meta.status === 200) {
-          return this.$message.success("登陆成功");
-        } else {
-          return this.$message.error("登陆失败！");
-        }
-      });
     }
   }
 };

@@ -17,13 +17,13 @@
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary">添加用户</el-button>
+          <el-button type="primary" @click="addDialogVisible = true">添加用户</el-button>
         </el-col>
       </el-row>
       <!-- 用户列表区域 -->
       <el-table :data="userList" style="width: 100%" stripe border>
         <el-table-column type="index" label="#" width="50"></el-table-column>
-        <el-table-column prop="username" label="姓名" width="180"></el-table-column>
+        <el-table-column prop="username" label="用户名" width="180"></el-table-column>
         <el-table-column prop="mobile" label="手机号" width="180"></el-table-column>
         <el-table-column prop="email" label="邮箱" width="220"></el-table-column>
         <el-table-column label="状态" width="160">
@@ -60,6 +60,30 @@
         :total="total"
       ></el-pagination>
     </el-card>
+
+    <!-- 添加用户对话框 -->
+    <el-dialog title="添加用户" :visible.sync="addDialogVisible" width="40%">
+      <!-- 内容主体区 -->
+      <el-form label-width="100px" :model="newUser" :rules="addRules" class="demo-ruleForm">
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="newUser.username"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input v-model="newUser.password"></el-input>
+        </el-form-item>
+        <el-form-item label="手机号" prop="phone">
+          <el-input v-model="newUser.phone"></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="newUser.email"></el-input>
+        </el-form-item>
+      </el-form>
+      <!-- 底部按钮区 -->
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="addDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addDialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -67,6 +91,15 @@
 export default {
   name: "User",
   data() {
+    var validatorPhone = (rule, value, callback) => {
+      //手机号验证规则
+      var reg = /^1[3|4|5|7|8][0-9]{9}$/;
+      if (!reg.test(value)) {
+        callback(new Error("手机号输入错误"));
+      } else {
+        callback();
+      }
+    };
     return {
       queryInfo: {
         query: "",
@@ -76,7 +109,43 @@ export default {
         pagesize: 2
       },
       userList: [],
-      total: 0
+      total: 0,
+      //控制添加用户对话框的显示和隐藏
+      addDialogVisible: false,
+      addRules: {
+        username: [
+          { required: true, message: "用户名不能为空", trigger: "blur" },
+          {
+            min: 3,
+            max: 16,
+            message: "用户名长度需在3~16位之间",
+            trigger: "blur"
+          }
+        ],
+        password: [
+          { required: true, message: "密码不能为空", trigger: "blur" },
+          {
+            min: 6,
+            max: 16,
+            message: "密码长度需在6~16位之间",
+            trigger: "blur"
+          }
+        ],
+        phone: [
+          { required: true, message: "手机号不能为空", trigger: "blur" },
+          {
+            validator: validatorPhone,
+            trigger: "blur"
+          }
+        ],
+        email: [{ required: true, message: "邮箱不能为空", trigger: "blur" }]
+      },
+      newUser: {
+        username: "",
+        password: "",
+        phone: "",
+        email: ""
+      }
     };
   },
   created() {

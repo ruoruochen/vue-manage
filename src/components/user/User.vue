@@ -95,7 +95,15 @@ export default {
       //手机号验证规则
       var reg = /^1[3|4|5|7|8][0-9]{9}$/;
       if (!reg.test(value)) {
-        callback(new Error("手机号输入错误"));
+        callback(new Error("手机号格式错误"));
+      } else {
+        callback();
+      }
+    };
+    var validatorEmail = (rule, value, callback) => {
+      var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+      if (!reg.test(value)) {
+        callback(new Error("邮箱格式错误"));
       } else {
         callback();
       }
@@ -138,7 +146,10 @@ export default {
             trigger: "blur"
           }
         ],
-        email: [{ required: true, message: "邮箱不能为空", trigger: "blur" }]
+        email: [
+          { required: true, message: "邮箱不能为空", trigger: "blur" },
+          { validator: validatorEmail, trigger: "blur" }
+        ]
       },
       newUser: {
         username: "",

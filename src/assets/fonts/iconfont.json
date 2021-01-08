@@ -6,6 +6,48 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1621660",
+      "name": "锁",
+      "font_class": "suo",
+      "unicode": "e644",
+      "unicode_decimal": 58948
+    },
+    {
+      "icon_id": "1727362",
+      "name": "25单据",
+      "font_class": "danju",
+      "unicode": "e89b",
+      "unicode_decimal": 59547
+    },
+    {
+      "icon_id": "1727367",
+      "name": "28体积、空间",
+      "font_class": "tijikongjian",
+      "unicode": "e89f",
+      "unicode_decimal": 59551
+    },
+    {
+      "icon_id": "1727461",
+      "name": "225默认头像",
+      "font_class": "morentouxiang",
+      "unicode": "e8c9",
+      "unicode_decimal": 59593
+    },
+    {
+      "icon_id": "1727589",
+      "name": "406报表",
+      "font_class": "baobiao",
+      "unicode": "e902",
+      "unicode_decimal": 59650
+    },
+    {
+      "icon_id": "4948990",
+      "name": "商品创建",
+      "font_class": "shangpinchuangjian",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
       "icon_id": "7677917",
       "name": "用户名",
       "font_class": "yonghuming",
@@ -13,11 +55,25 @@
       "unicode_decimal": 58898
     },
     {
+      "icon_id": "8555554",
+      "name": "lock-fill",
+      "font_class": "lock-fill",
+      "unicode": "e75a",
+      "unicode_decimal": 59226
+    },
+    {
       "icon_id": "10605731",
       "name": "密码",
       "font_class": "mima",
       "unicode": "e66c",
       "unicode_decimal": 58988
+    },
+    {
+      "icon_id": "11177997",
+      "name": "用户",
+      "font_class": "ziyuan",
+      "unicode": "e646",
+      "unicode_decimal": 58950
     }
   ]
 }

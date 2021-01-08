@@ -12,8 +12,8 @@
       <!-- 搜索框 -->
       <el-row :gutter="20">
         <el-col :span="8">
-          <el-input placeholder="请输入内容">
-            <el-button slot="append" icon="el-icon-search"></el-button>
+          <el-input placeholder="请输入内容" v-model="queryInfo.query" clearable @clear="clearSearch">
+            <el-button slot="append" icon="el-icon-search" @click="getUserList"></el-button>
           </el-input>
         </el-col>
         <el-col :span="4">
@@ -114,6 +114,10 @@ export default {
         this.userinfo.mg_state = !this.userinfo.mg_state;
       }
       this.$message.success("更新用户状态成功");
+    },
+    clearSearch() {
+      this.queryInfo.query = "";
+      this.getUserList();
     }
   }
 };

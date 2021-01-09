@@ -45,7 +45,12 @@
               @click="showEditDialog(scope.row.id)"
             ></el-button>
             <!-- 删除按钮 -->
-            <el-button type="danger" icon="el-icon-delete" size="small"></el-button>
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              size="small"
+              @click="deleteUser(scope.row.id)"
+            ></el-button>
             <!-- 分配权限按钮 -->
             <el-tooltip effect="dark" content="设置用户权限" placement="top" :enterable="false">
               <el-button type="warning" icon="el-icon-setting" size="small"></el-button>
@@ -113,7 +118,7 @@
       <!-- 底部按钮区 -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="editDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="editDialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click="editUserInfo">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -258,6 +263,70 @@ export default {
     },
     CloseEdit() {
       this.$refs.editFormRef.resetFields();
+    },
+    editUserInfo() {
+      this.$refs.editFormRef.validate(async valid => {
+        if (!valid) return this.$message.error("表单内容错误，请重新输入！");
+
+        // 发送网络请求，修改
+        const { data: res } = await this.$http.put(
+          `users/${this.editUser.id}`,
+          this.editUser
+        );
+        console.log(res);
+        if (res.meta.status !== 200) {
+          return this.$message.error("用户信息更新失败");
+        }
+        this.$message.success("用户信息更新成功");
+        this.editDialogVisible = false;
+        this.getUserList();
+      });
+    },
+    async deleteUser(id) {
+      const confirmResult = await this.$confirm(
+        "此操作将永久删除该用户, 是否继续?",
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        }
+      ).catch(err => err);
+      // .then(async () => {
+      //   // 发起请求
+      //   const { data: res } = await this.$http.delete(`users/${id}`, id);
+      //   console.log(res);
+      //   if (res.meta.status !== 200) {
+      //     return this.$message.error("删除失败");
+      //   }
+      //   this.$message({
+      //     type: "success",
+      //     message: "删除成功!"
+      //   });
+      //   this.getUserList();
+      // })
+      // .catch(() => {
+      //   this.$message({
+      //     type: "info",
+      //     message: "已取消删除"
+      //   });
+      // });
+      if (confirmResult !== "confirm") {
+        return this.$message({
+          type: "info",
+          message: "已取消删除"
+        });
+      }
+      const { data: res } = await this.$http.delete(`users/${id}`);
+      console.log(res);
+      if (res.meta.status !== 200) {
+        return this.$message.error("删除用户失败");
+      }
+      this.$message({
+        type: "success",
+        message: "删除用户成功!"
+      });
+      this.getUserList();
     }
   }
 };

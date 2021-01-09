@@ -38,7 +38,12 @@
         <el-table-column label="操作" width="190">
           <template v-slot="scope">
             <!-- 修改按钮 -->
-            <el-button type="primary" icon="el-icon-edit" size="small"></el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              size="small"
+              @click="showEditDialog(scope.row.id)"
+            ></el-button>
             <!-- 删除按钮 -->
             <el-button type="danger" icon="el-icon-delete" size="small"></el-button>
             <!-- 分配权限按钮 -->
@@ -84,6 +89,33 @@
         <el-button type="primary" @click="addDialogVisible = false">确 定</el-button>
       </span>
     </el-dialog>
+
+    <!-- 修改用户的对话框 -->
+    <el-dialog title="修改用户" :visible.sync="editDialogVisible" width="40%" @close="CloseEdit">
+      <!-- 内容主体区 -->
+      <el-form
+        ref="editFormRef"
+        label-width="100px"
+        :model="editUser"
+        :rules="editRules"
+        class="demo-ruleForm"
+      >
+        <el-form-item label="用户名">
+          <el-input v-model="editUser.username" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="editUser.email"></el-input>
+        </el-form-item>
+        <el-form-item label="手机号" prop="mobile">
+          <el-input v-model="editUser.mobile"></el-input>
+        </el-form-item>
+      </el-form>
+      <!-- 底部按钮区 -->
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="editDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="editDialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -120,6 +152,8 @@ export default {
       total: 0,
       //控制添加用户对话框的显示和隐藏
       addDialogVisible: false,
+      // 控制修改用户对话框的显示和隐藏
+      editDialogVisible: false,
       addRules: {
         username: [
           { required: true, message: "用户名不能为空", trigger: "blur" },
@@ -151,12 +185,26 @@ export default {
           { validator: validatorEmail, trigger: "blur" }
         ]
       },
+      editRules: {
+        email: [
+          { required: true, message: "邮箱不能为空", trigger: "blur" },
+          { validator: validatorEmail, trigger: "blur" }
+        ],
+        mobile: [
+          { required: true, message: "手机号不能为空", trigger: "blur" }
+          // {
+          //   validator: validatorPhone,
+          //   trigger: "blur"
+          // }
+        ]
+      },
       newUser: {
         username: "",
         password: "",
         phone: "",
         email: ""
-      }
+      },
+      editUser: {}
     };
   },
   created() {
@@ -198,6 +246,18 @@ export default {
     clearSearch() {
       this.queryInfo.query = "";
       this.getUserList();
+    },
+    async showEditDialog(id) {
+      console.log(id);
+      this.editDialogVisible = true;
+      const { data: res } = await this.$http.get(`users/${id}`);
+      if (res.meta.status !== 200)
+        return this.$message.error("获取用户信息失败");
+      this.editUser = res.data;
+      console.log(res.data);
+    },
+    CloseEdit() {
+      this.$refs.editFormRef.resetFields();
     }
   }
 };

@@ -1,5 +1,6 @@
 /* 100%高度 */
 html,body,#app{
+  min-width: 1366px;
   height: 100%;
   margin: 0 ;
   padding: 0;

@@ -33,7 +33,7 @@
           <template v-slot="scope">{{scope.row.create_time | dateFormat}}</template>
         </el-table-column>
         <el-table-column label="操作">
-          <template v-slot="scope">
+          <template>
             <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditBox"></el-button>
             <el-button type="success" icon="el-icon-location" size="mini" @click="showProgressBox"></el-button>
           </template>

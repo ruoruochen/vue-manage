@@ -313,7 +313,7 @@ export default {
 };
 </script>
 
-<style>
+<style  lang="less" scope>
 .el-cascader-panel {
   height: 200px;
   width: 100%;

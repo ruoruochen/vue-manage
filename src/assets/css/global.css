@@ -23,3 +23,19 @@ html,body,#app{
 .el-pagination{
   margin-top: 20px;
 }
+
+.el-steps{
+  margin: 15px auto;
+}
+
+.el-step__title{
+  font-size: 13px;
+}
+
+.el-tabs{
+  margin: 20px 0 ;
+}
+
+.ql-editor{
+  min-height: 300px;
+}

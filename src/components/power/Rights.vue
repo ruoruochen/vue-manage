@@ -46,7 +46,7 @@ export default {
 };
 </script>
 
-<style lang="less" scope>
+<style lang="less" scoped>
 .text {
   font-size: 14px;
 }

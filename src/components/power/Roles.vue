@@ -50,7 +50,7 @@
                     <el-col>
                       <el-tag
                         :class="['thirdtag']"
-                        v-for="(item3,i3) in item2.children"
+                        v-for="(item3) in item2.children"
                         :key="item3.id"
                         type="warning"
                         closable
@@ -362,7 +362,7 @@ export default {
 };
 </script>
 
-<style lang="less" scope>
+<style lang="less" scoped>
 .el-tag {
   margin: 12px 0px;
   margin-right: 5px;

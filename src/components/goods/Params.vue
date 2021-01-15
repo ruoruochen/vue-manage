@@ -397,26 +397,25 @@ export default {
 };
 </script>
 
-<style lang="less" scope>
+<style lang="less" scoped>
 .col_opt {
   margin: 15px 0;
 }
 
 .el-tag {
   margin-right: 20px;
+  margin-top: 10px;
 }
 
-.el-tag + .el-tag {
-  margin-left: 10px;
-}
 .button-new-tag {
-  margin-left: 10px;
+  margin-top: 15px;
   height: 32px;
   line-height: 30px;
   padding-top: 0;
   padding-bottom: 0;
 }
 .input-new-tag {
+  margin-top: 15px;
   width: 120px !important;
 }
 </style>

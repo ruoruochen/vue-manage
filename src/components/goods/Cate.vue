@@ -281,6 +281,8 @@ export default {
             cat_name: this.editCateForm.editCateName
           }
         );
+        console.log(res);
+
         if (res.meta.status !== 200)
           return this.$message.error("商品分类信息更新失败");
         console.log(res.data);

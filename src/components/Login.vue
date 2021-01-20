@@ -3,7 +3,7 @@
     <div class="login_box">
       <!-- 头像区 -->
       <div class="login_head">
-        <img src="../assets/images/logo.png" alt />
+        <img src="@assets/images/logo.png" alt />
       </div>
       <!-- 登录表单区 -->
       <el-form

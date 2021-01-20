@@ -142,7 +142,7 @@ export default {
       checkList: [],
       onlyparamList: [],
       fileList: [],
-      uploadurl: "http://127.0.0.1:8888/api/private/v1/upload",
+      uploadurl: "http://8.136.180.108:8801/api/private/v1/upload",
       headerObj: {
         Authorization: window.sessionStorage.getItem("token")
       },

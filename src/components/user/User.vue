@@ -79,15 +79,21 @@
     <!-- 添加用户对话框 -->
     <el-dialog title="添加用户" :visible.sync="addDialogVisible" width="40%">
       <!-- 内容主体区 -->
-      <el-form label-width="100px" :model="newUser" :rules="addRules" class="demo-ruleForm">
+      <el-form
+        ref="addFormRef"
+        label-width="100px"
+        :model="newUser"
+        :rules="addRules"
+        class="demo-ruleForm"
+      >
         <el-form-item label="用户名" prop="username">
           <el-input v-model="newUser.username"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input v-model="newUser.password"></el-input>
+          <el-input v-model="newUser.password" type="password"></el-input>
         </el-form-item>
-        <el-form-item label="手机号" prop="phone">
-          <el-input v-model="newUser.phone"></el-input>
+        <el-form-item label="手机号" prop="mobile">
+          <el-input v-model="newUser.mobile"></el-input>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
           <el-input v-model="newUser.email"></el-input>
@@ -96,7 +102,7 @@
       <!-- 底部按钮区 -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="addDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addDialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click="addUser">确 定</el-button>
       </span>
     </el-dialog>
 
@@ -210,7 +216,7 @@ export default {
             trigger: "blur"
           }
         ],
-        phone: [
+        mobile: [
           { required: true, message: "手机号不能为空", trigger: "blur" },
           {
             validator: validatorPhone,
@@ -239,7 +245,7 @@ export default {
         username: "",
         password: "",
         phone: "",
-        email: ""
+        mobile: ""
       },
       editUser: {},
       setRoleDialogVisible: false,
@@ -376,6 +382,19 @@ export default {
     editDialogClosed() {
       this.selectRoleId = "";
       this.userInfo = [];
+    },
+    addUser() {
+      // 预验证
+      this.$refs.addFormRef.validate(async valid => {
+        if (!valid) return this.$message.error("表单验证错误，请重新填写表单");
+        this.addDialogVisible = false;
+        const { data: res } = await this.$http.post("users", this.newUser);
+        console.log(res);
+
+        if (res.meta.status !== 201) return this.$message.error("添加用户失败");
+        this.$message.success("添加用户成功");
+        this.getUserList();
+      });
     }
   }
 };

@@ -3,7 +3,7 @@
     <!-- 头部区域 -->
     <el-header class="header">
       <div class="left_header">
-        <img src="../assets/images/touxiang.jpg" alt />
+        <img src="@assets/images/touxiang.jpg" alt />
         <span>电商管理系统</span>
       </div>
       <el-button type="info" @click="logout">退出</el-button>

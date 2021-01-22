@@ -10,6 +10,8 @@
 
 🐱 [GitHub笔记](https://github.com/ruoruochen/front-end-note/tree/master/Vue%E7%94%B5%E5%95%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE)
 
+本项目学习视频网站：[黑马程序员Vue项目](https://www.bilibili.com/video/BV1EE411B7SU)
+
 ### 项目使用指南：
 
 1. 希望能给本项目一个`star`~，感谢。

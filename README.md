@@ -2,11 +2,15 @@
 
 整理不易，若对您有帮助，请给个star，您的支持是我更新的动力 👇
 
-🚩[在线体验地址](http://8.136.180.108/#/login) 体验账号：admin 密码：123456 已经默认设置啦，可以直接登录。
+[🚩在线体验地址1](http://118.31.171.210/#/welcome)体验账号：admin 密码：123456 已经默认设置啦，可以直接登录。
+
+[🚩在线体验地址2](http://8.136.180.108/#/login) 
 
 📖[开发全过程博客记录](https://blog.csdn.net/weixin_43786756/category_10716603.html)
 
 🐱 [GitHub笔记](https://github.com/ruoruochen/front-end-note/tree/master/Vue%E7%94%B5%E5%95%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE)
+
+本项目学习视频网站：[黑马程序员Vue项目](https://www.bilibili.com/video/BV1EE411B7SU)
 
 ### 项目使用指南：
 
@@ -15,9 +19,10 @@
 3. 在该项目下执行`npm install`安装依赖
 4. 执行`npm run serve`打开本地服务
 
-### 部署上限指南
+### 部署上线指南
+各位看官老爷们,希望能给我的Github一个star~为了整理这个纯小白部署上线教程，我又重新购买了一个服务器，从头弄了一遍，看在这个份上可怜可怜小人把呜呜呜呜。
 
-📖正在整理中，很快就会上线啦~敬请期待。
+📖[【超详细小白教学】Vue+nodejs电商项目部署指南](https://blog.csdn.net/weixin_43786756/article/details/112982951)
 
 ## 项目概述
 

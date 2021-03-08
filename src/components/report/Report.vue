@@ -1,11 +1,7 @@
 <template>
   <div>
-    <!-- 面包屑导航区域 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>数据统计</el-breadcrumb-item>
-      <el-breadcrumb-item>数据报表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <!-- 面包屑导航 -->
+    <crumb v-bind:data="crumbData"></crumb>
 
     <!-- 卡片视图 -->
     <el-card>
@@ -43,7 +39,8 @@ export default {
             data: [5, 20, 36, 10, 10, 20]
           }
         ]
-      }
+      },
+      crumbData: ["首页", "数据统计", "数据报表"]
     };
   },
   //此时dom元素渲染完毕

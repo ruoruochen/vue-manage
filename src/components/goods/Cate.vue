@@ -1,11 +1,7 @@
 <template>
   <div>
     <!-- 面包屑导航 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>商品管理</el-breadcrumb-item>
-      <el-breadcrumb-item>商品分类</el-breadcrumb-item>
-    </el-breadcrumb>
+    <crumb v-bind:data="crumbData"></crumb>
 
     <!-- 卡片视图 -->
     <el-card class="box-card">
@@ -130,6 +126,7 @@ export default {
         pagesize: 5
       },
       total: 0,
+      crumbData: ["首页", "商品管理", "商品分类"],
       columns: [
         {
           label: "分类名称",

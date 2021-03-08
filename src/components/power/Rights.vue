@@ -1,11 +1,7 @@
 <template>
   <div>
     <!-- 面包屑导航 -->
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>权限管理</el-breadcrumb-item>
-      <el-breadcrumb-item>权限列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <crumb v-bind:data="crumbData"></crumb>
 
     <!-- 卡片视图 -->
     <el-card>
@@ -30,7 +26,8 @@ export default {
   name: "Rights",
   data() {
     return {
-      rightsList: []
+      rightsList: [],
+      crumbData: ["首页", "权限管理", "权限列表"]
     };
   },
   methods: {

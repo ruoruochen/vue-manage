@@ -1,11 +1,7 @@
 <template>
   <div>
-    <!-- 面包屑导航区域 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-      <el-breadcrumb-item>角色管理</el-breadcrumb-item>
-    </el-breadcrumb>
+    <!-- 面包屑导航 -->
+    <crumb v-bind:data="crumbData"></crumb>
 
     <!-- 卡片视图 -->
     <el-card class="box-card">
@@ -173,7 +169,8 @@ export default {
       treeProps: { label: "authName", children: "children" },
       //默认选中节点id值数组
       defKeys: [],
-      roleId: ""
+      roleId: "",
+      crumbData: ["首页", "用户管理", "角色管理"]
     };
   },
   methods: {

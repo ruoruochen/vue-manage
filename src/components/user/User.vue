@@ -1,11 +1,7 @@
 <template>
   <div>
-    <!-- 面包屑导航区域 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/welcome' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-      <el-breadcrumb-item>用户列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <!-- 面包屑导航 -->
+    <crumb v-bind:data="crumbData"></crumb>
 
     <!-- 卡片视图 -->
     <el-card>
@@ -251,7 +247,8 @@ export default {
       setRoleDialogVisible: false,
       userInfo: [],
       rolesList: [],
-      selectRoleId: ""
+      selectRoleId: "",
+      crumbData: ["首页", "用户管理", "用户列表"]
     };
   },
   created() {

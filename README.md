@@ -10,7 +10,6 @@
 
 🐱 [GitHub笔记](https://github.com/ruoruochen/front-end-note/tree/master/Vue%E7%94%B5%E5%95%86%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE)
 
-本项目学习视频网站：[黑马程序员Vue项目](https://www.bilibili.com/video/BV1EE411B7SU)
 
 ### 项目使用指南：
 
@@ -30,19 +29,18 @@
 
 根据不同的应用场景，电商系统一般都提供了 PC 端、移动 APP、移动 Web、微信小程序等多种终端访问方式，我们主要是实现PC后台管理系统。 
 
-![image-20210119212246751](http://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/image-20210119212246751.png)
+![image-20210309122856022](http://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/image-20210309122856022.png)
 
 ### 1.2 电商后台管理系统的功能
 
 电商后台管理系统用于管理用户账号、商品分类、商品信息、订单、数据统计等业务功能。
 
-![image-20210119212505857](http://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/image-20210119212505857.png)
+![image-20210309122919582](http://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/image-20210309122919582.png)
 
 ### 1.3 电商后台管理系统的开发模式（前后端分离）
 
 电商后台管理系统整体采用前后端分离的开发模式，其中前端项目是**基于 Vue 技术栈的 SPA 项目。**
-
-![image-20210119212605335](http://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/image-20210119212605335.png)
+![image-20210309122931478](http://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/image-20210309122931478.png)
 
 ## 电商后台管理系统的技术选型
 

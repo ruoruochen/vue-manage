@@ -29,87 +29,36 @@
       </el-row>
       <!-- 通用表格组件 -->
       <CommonTable
-        ref="commonTable"
         :tableTitle="tableTitle"
         :tableCol="tableCol"
         :tableData="userList"
-        :pageConfig="queryInfo"
         :operator="operator"
         :total="total"
+        :pageConfig="queryInfo"
         @sizeChange="handleSizeChange"
         @pageChange="handleCurrentChange"
       />
     </el-card>
-    <!-- 
+
+    <!-- 添加用户的对话框 -->
     <CommonModal
       modalTitle="添加用户"
       :showModal="addDialogVisible"
       :dataRules="addRules"
       :submit="addUser"
-      :modelData="newUser"
-      :formConfig
-    /> -->
-    <!-- 添加用户对话框 -->
-    <el-dialog title="添加用户" :visible.sync="addDialogVisible" width="40%">
-      <!-- 内容主体区 -->
-      <el-form
-        ref="addFormRef"
-        label-width="100px"
-        :model="newUser"
-        :rules="addRules"
-        class="demo-ruleForm"
-      >
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="newUser.username"></el-input>
-        </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input v-model="newUser.password" type="password"></el-input>
-        </el-form-item>
-        <el-form-item label="手机号" prop="mobile">
-          <el-input v-model="newUser.mobile"></el-input>
-        </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="newUser.email"></el-input>
-        </el-form-item>
-      </el-form>
-      <!-- 底部按钮区 -->
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="addDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addUser">确 定</el-button>
-      </span>
-    </el-dialog>
+      :cancel="cancelModal"
+      :formConfig="formConfig"
+    />
 
     <!-- 修改用户的对话框 -->
-    <el-dialog
-      title="修改用户"
-      :visible.sync="editDialogVisible"
-      width="40%"
-      @close="CloseEdit"
-    >
-      <!-- 内容主体区 -->
-      <el-form
-        ref="editFormRef"
-        label-width="100px"
-        :model="editUser"
-        :rules="editRules"
-        class="demo-ruleForm"
-      >
-        <el-form-item label="用户名">
-          <el-input v-model="editUser.username" :disabled="true"></el-input>
-        </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="editUser.email"></el-input>
-        </el-form-item>
-        <el-form-item label="手机号" prop="mobile">
-          <el-input v-model="editUser.mobile"></el-input>
-        </el-form-item>
-      </el-form>
-      <!-- 底部按钮区 -->
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="editDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="editUserInfo">确 定</el-button>
-      </span>
-    </el-dialog>
+    <CommonModal
+      modalTitle="添加用户"
+      :showModal="addDialogVisible"
+      :dataRules="addRules"
+      :submit="addUser"
+      :cancel="cancelModal"
+      :formConfig="formConfig"
+    />
 
     <!-- 分配角色对话框 -->
     <el-dialog
@@ -219,17 +168,7 @@ export default {
         ],
         mobile: [
           { required: true, message: '手机号不能为空', trigger: 'blur' },
-          // {
-          //   validator: validatorPhone,
-          //   trigger: "blur"
-          // }
         ],
-      },
-      newUser: {
-        username: '',
-        password: '',
-        phone: '',
-        mobile: '',
       },
       editUser: {},
       setRoleDialogVisible: false,
@@ -279,13 +218,12 @@ export default {
           },
         },
       ],
-      // formConfig:[
-      //   {prop:'username',label:'用户名'},
-      //   {prop:'password',label:'密码',type:'password'},
-      //   {prop:'mobile',label:'手机号'},
-      //   {prop:'mobile',label:'手机号'},
-
-      // ]
+      formConfig: [
+        { prop: 'username', label: '用户名' },
+        { prop: 'password', label: '密码', type: 'password' },
+        { prop: 'mobile', label: '手机号' },
+        { prop: 'email', label: '邮箱' },
+      ],
     }
   },
   created() {
@@ -296,7 +234,6 @@ export default {
       const { data: res } = await this.$http.get('users', {
         params: this.queryInfo,
       })
-      console.log(res)
       if (res.meta.status !== 200)
         return this.$message.error('获取用户列表失败')
       this.userList = res.data.users
@@ -417,18 +354,16 @@ export default {
       this.selectRoleId = ''
       this.userInfo = []
     },
-    addUser() {
-      // 预验证
-      this.$refs.addFormRef.validate(async (valid) => {
-        if (!valid) return this.$message.error('表单验证错误，请重新填写表单')
-        this.addDialogVisible = false
-        const { data: res } = await this.$http.post('users', this.newUser)
-        console.log(res)
+    async addUser(data) {
+      this.addDialogVisible = false
+      const { data: res } = await this.$http.post('users', data)
 
-        if (res.meta.status !== 201) return this.$message.error('添加用户失败')
-        this.$message.success('添加用户成功')
-        this.getUserList()
-      })
+      if (res.meta.status !== 201) return this.$message.error('添加用户失败')
+      this.$message.success('添加用户成功')
+      this.getUserList()
+    },
+    cancelModal() {
+      this.addDialogVisible = false
     },
   },
 }
@@ -438,11 +373,9 @@ export default {
 .text {
   font-size: 14px;
 }
-
 .item {
   padding: 18px 0;
 }
-
 .box-card {
   width: 480px;
 }
